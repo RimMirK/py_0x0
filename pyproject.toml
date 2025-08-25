@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "0x0"
+version = "0.0.0"
+description = "Python client for pastes.dev"
+readme = "README.pypi.md"
+license = { file = "LICENCE" }
+requires-python = ">=3.8"
+dependencies = ["requests", "httpx"]
+authors = [
+  { name = "RimMirK", email = "me@RimMirK.pp.ua" }
+]
+urls = { Repository = "https://github.com/RimMirK/0x0" }
+
+keywords = ["0x0", "api", "files", "client", "storage", "file-storage", "file-share",]
+
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent"
+]
+
+[tool.setuptools]
+packages = ["py_0x0"]
+include-package-data = true
+zip-safe = false
