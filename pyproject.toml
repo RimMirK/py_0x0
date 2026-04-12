@@ -3,24 +3,44 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "0x0"
-version = "0.0.0"
-description = "Python client for pastes.dev"
+name = "py-0x0"
+version = "0.1.0"
+description = "Minimal Python client for 0x0.st file hosting service"
 readme = "README.pypi.md"
 license = { file = "LICENCE" }
 requires-python = ">=3.8"
-dependencies = ["requests", "httpx"]
-authors = [
-  { name = "RimMirK", email = "me@RimMirK.pp.ua" }
+dependencies = [
+    "requests>=2.25.0",
+    "httpx>=0.23.0",
 ]
-urls = { Repository = "https://github.com/RimMirK/0x0" }
+authors = [
+  { name = "RimMirK", email = "me@RimMirK.dev" }
+]
+urls = { 
+    Repository = "https://github.com/RimMirK/py_0x0",
+    Documentation = "https://github.com/RimMirK/py_0x0#readme",
+    Issues = "https://github.com/RimMirK/py_0x0/issues",
+}
 
-keywords = ["0x0", "api", "files", "client", "storage", "file-storage", "file-share",]
+keywords = [
+    "0x0",
+    "api",
+    "files",
+    "client",
+    "storage",
+    "file-storage",
+    "file-share",
+    "file-hosting",
+    "async",
+    "http",
+]
 
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Libraries",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Utilities",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
@@ -28,10 +48,43 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
-    "Operating System :: OS Independent"
+    "Operating System :: OS Independent",
+    "Typing :: Typed",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0",
+    "isort>=5.11.0",
 ]
 
 [tool.setuptools]
 packages = ["py_0x0"]
 include-package-data = true
 zip-safe = false
+
+[tool.black]
+line-length = 88
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests_basic.py"]
+python_files = "test_*.py"
+addopts = "-v --tb=short"
