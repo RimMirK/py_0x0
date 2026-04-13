@@ -22,6 +22,7 @@ from ._utils import _normalize_file_input, _parse_upload_response
 async def aupload_0x0(
     file_input: Union[str, Path, BinaryIO, bytes, bytearray],
     expiration: Optional[str] = None,
+    secret: bool = False,
     server: Optional[str] = None,
     raise_on_error: bool = True,
 ) -> Optional[UploadResponse]:
@@ -33,6 +34,7 @@ async def aupload_0x0(
     Args:
         file_input: File to upload (path, file object, or bytes).
         expiration: Expiration time as readable string.
+        secret: If True, generates a harder-to-guess URL.
         server: 0x0.st server URL. If None, uses default server.
         raise_on_error: If False, returns None instead of raising exceptions.
     
@@ -45,7 +47,7 @@ async def aupload_0x0(
         NetworkError: If network communication fails.
     
     Example:
-        >>> response = await aupload_0x0('document.pdf')
+        >>> response = await aupload_0x0('document.pdf', secret=True)
         >>> print(response.url)
     """
     try:
@@ -76,7 +78,10 @@ async def aupload_0x0(
         data = {}
         
         if expiration:
-            data['expiration'] = expiration
+            data['expires'] = expiration
+        
+        if secret:
+            data['secret'] = '1'
         
         # Send request
         try:
@@ -106,6 +111,7 @@ async def aupload_0x0(
 async def aupload_many_0x0(
     files: List[Union[str, Path, BinaryIO, bytes, bytearray]],
     expiration: Optional[str] = None,
+    secret: bool = False,
     server: Optional[str] = None,
     raise_on_error: bool = True,
 ) -> List[Optional[UploadResponse]]:
@@ -115,6 +121,7 @@ async def aupload_many_0x0(
     Args:
         files: List of files to upload.
         expiration: Expiration time for all files.
+        secret: If True, generates a harder-to-guess URL for all files.
         server: 0x0.st server URL. If None, uses default server.
         raise_on_error: If False, errors are ignored for individual uploads.
     
@@ -122,7 +129,7 @@ async def aupload_many_0x0(
         List of UploadResponse objects (or None for failed uploads).
     
     Example:
-        >>> responses = await aupload_many_0x0(['file1.txt', 'file2.pdf'])
+        >>> responses = await aupload_many_0x0(['file1.txt', 'file2.pdf'], secret=True)
     """
     tasks = []
     for file_input in files:
@@ -130,6 +137,7 @@ async def aupload_many_0x0(
             aupload_0x0(
                 file_input,
                 expiration=expiration,
+                secret=secret,
                 server=server,
                 raise_on_error=raise_on_error,
             )

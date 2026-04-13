@@ -17,7 +17,7 @@ from py_0x0 import (
 
 def example_simple_sync():
     """Upload a single file with its path."""
-    response = upload_0x0('document.pdf')
+    response = upload_0x0('readme.md')
     print(f"✓ Uploaded: {response.url}")
     print(f"  Filename: {response.filename}")
     print(f"  Size: {response.size} bytes")
@@ -29,7 +29,7 @@ def example_simple_sync():
 
 def example_file_object():
     """Upload using an open file object."""
-    with open('image.png', 'rb') as f:
+    with open('readme.md', 'rb') as f:
         response = upload_0x0(f)
         print(f"✓ Uploaded: {response.url}")
 
@@ -52,7 +52,7 @@ def example_bytes():
 def example_expiration():
     """Upload file with custom expiration time."""
     response = upload_0x0(
-        'secret.txt',
+        'readme.md',
         expiration='1 hour'  # Expires after 1 hour
     )
     print(f"✓ Uploaded with expiration: {response.url}")

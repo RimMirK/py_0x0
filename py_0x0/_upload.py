@@ -21,6 +21,7 @@ from ._utils import _normalize_file_input, _parse_upload_response
 def upload_0x0(
     file_input: Union[str, Path, BinaryIO, bytes, bytearray],
     expiration: Optional[str] = None,
+    secret: bool = False,
     server: Optional[str] = None,
     raise_on_error: bool = True,
 ) -> Optional[UploadResponse]:
@@ -38,6 +39,7 @@ def upload_0x0(
         file_input: File to upload (path, file object, or bytes).
         expiration: Expiration time as readable string (e.g., '1 hour', '7 days').
                    If None, server defaults apply.
+        secret: If True, generates a harder-to-guess URL.
         server: 0x0.st server URL. If None, uses default server set via set_default_server().
         raise_on_error: If False, returns None instead of raising exceptions.
     
@@ -51,7 +53,7 @@ def upload_0x0(
         NetworkError: If network communication fails.
     
     Example:
-        >>> response = upload_0x0('document.pdf')
+        >>> response = upload_0x0('document.pdf', secret=True)
         >>> print(response.url)
         https://0x0.st/abc123.pdf
     """
@@ -82,7 +84,10 @@ def upload_0x0(
         data = {}
         
         if expiration:
-            data['expiration'] = expiration
+            data['expires'] = expiration
+        
+        if secret:
+            data['secret'] = '1'
         
         # Send request
         try:
@@ -112,6 +117,7 @@ def upload_0x0(
 def upload_many_0x0(
     files: List[Union[str, Path, BinaryIO, bytes, bytearray]],
     expiration: Optional[str] = None,
+    secret: bool = False,
     server: Optional[str] = None,
     raise_on_error: bool = True,
 ) -> List[Optional[UploadResponse]]:
@@ -121,6 +127,7 @@ def upload_many_0x0(
     Args:
         files: List of files to upload (same types as upload_0x0).
         expiration: Expiration time for all files.
+        secret: If True, generates a harder-to-guess URL for all files.
         server: 0x0.st server URL. If None, uses default server.
         raise_on_error: If False, errors are ignored and None returned for failed uploads.
     
@@ -132,7 +139,7 @@ def upload_many_0x0(
         UploadError: If any upload fails (when raise_on_error=True).
     
     Example:
-        >>> responses = upload_many_0x0(['file1.txt', 'file2.pdf'])
+        >>> responses = upload_many_0x0(['file1.txt', 'file2.pdf'], secret=True)
         >>> for r in responses:
         ...     print(r.url)
     """
@@ -142,6 +149,7 @@ def upload_many_0x0(
             result = upload_0x0(
                 file_input,
                 expiration=expiration,
+                secret=secret,
                 server=server,
                 raise_on_error=True,
             )
