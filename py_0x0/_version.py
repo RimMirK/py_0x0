@@ -2,7 +2,7 @@
 Build and release information for py_0x0.
 """
 
-__version__ = "0.1.0"
+__version__ = "1.0.0"
 __author__ = "RimMirK"
 __email__ = "me@RimMirK.dev"
 __description__ = "Minimal Python client for 0x0.st file hosting service"
@@ -10,7 +10,7 @@ __url__ = "https://github.com/RimMirK/py_0x0"
 __license__ = "GPLv3"
 
 # Project metadata
-PROJECT_NAME = "py-0x0"
+PROJECT_NAME = "py_0x0"
 PYTHON_REQUIRES = ">=3.8"
 
 DEPENDENCIES = [

@@ -3,8 +3,8 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "py-0x0"
-version = "0.1.0"
+name = "py_0x0"
+version = "1.0.0"
 description = "Minimal Python client for 0x0.st file hosting service"
 readme = "README.pypi.md"
 license = { file = "LICENCE" }
