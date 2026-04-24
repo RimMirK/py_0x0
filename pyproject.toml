@@ -9,18 +9,15 @@ description = "Minimal Python client for 0x0.st file hosting service"
 readme = "README.pypi.md"
 license = { file = "LICENCE" }
 requires-python = ">=3.8"
+
 dependencies = [
     "requests>=2.25.0",
     "httpx>=0.23.0",
 ]
-authors = [
-  { name = "RimMirK", email = "me@RimMirK.dev" }
-]
 
-[project.urls]
-Repository = "https://github.com/RimMirK/py_0x0"
-Documentation = "https://github.com/RimMirK/py_0x0#readme"
-Issues = "https://github.com/RimMirK/py_0x0/issues"
+authors = [
+    { name = "RimMirK", email = "me@RimMirK.dev" }
+]
 
 keywords = [
     "0x0",
@@ -52,6 +49,11 @@ classifiers = [
     "Typing :: Typed",
 ]
 
+[project.urls]
+Repository = "https://github.com/RimMirK/py_0x0"
+Documentation = "https://github.com/RimMirK/py_0x0#readme"
+Issues = "https://github.com/RimMirK/py_0x0/issues"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0",
@@ -70,7 +72,7 @@ zip-safe = false
 
 [tool.black]
 line-length = 88
-target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+target-version = ["py38", "py39", "py310", "py311", "py312"]
 include = '\.pyi?$'
 
 [tool.isort]
