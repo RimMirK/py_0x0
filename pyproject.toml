@@ -16,11 +16,11 @@ dependencies = [
 authors = [
   { name = "RimMirK", email = "me@RimMirK.dev" }
 ]
-urls = {
-    Repository = "https://github.com/RimMirK/py_0x0",
-    Documentation = "https://github.com/RimMirK/py_0x0#readme",
-    Issues = "https://github.com/RimMirK/py_0x0/issues",
-}
+
+[project.urls]
+Repository = "https://github.com/RimMirK/py_0x0"
+Documentation = "https://github.com/RimMirK/py_0x0#readme"
+Issues = "https://github.com/RimMirK/py_0x0/issues"
 
 keywords = [
     "0x0",
